@@ -7,37 +7,27 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class RateLimiterWithConcurrencyHandeling {
-    private Deque<LocalDateTime> q = new LinkedList<>();
     private int capacity;
     private int timeToLiveInMinutes;
     // a hashmap where key is client id and value is datetime queue
-    private ConcurrentHashMap<Integer, Deque> requests = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Deque<LocalDateTime>> requests = new ConcurrentHashMap<>();
 
     public boolean rateLimit(int customerId)
     {
         //get queue for the specific customers
-        Deque<LocalDateTime> q = requests.get(customerId);
+        Deque<LocalDateTime> deque = requests.get(customerId);
         LocalDateTime currentTime = LocalDateTime.now();
+        while(!deque.isEmpty() && deque.peekFirst().plusMinutes(timeToLiveInMinutes).isAfter(currentTime)){
+            deque.removeFirst();
+        }
         //if the threshold is not hit yet, append the request
-        if(requests.get(customerId).size() < capacity){
-            q.addLast(currentTime);
-            requests.put(customerId, q);
-            return true;
+        if(deque.size() == capacity){
+            deque.removeFirst();
         }
-        else{
-            while(!q.isEmpty() && q.peekFirst().plusMinutes(timeToLiveInMinutes).isAfter(currentTime)){
-                q.removeFirst();
-            }
-            if(requests.get(customerId).size() < capacity){
-                q.addLast(currentTime);
-                requests.put(customerId, q);
-                return true;
-            }
-        }
-        return false;
+        deque.addLast(currentTime);
+        requests.put(customerId, deque);
+        return true;
     }
 
-    public static void main(String[] args) {
 
-    }
 }
