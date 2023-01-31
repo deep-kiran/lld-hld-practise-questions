@@ -18,8 +18,6 @@ public class GetClosedOrdersStockTrading {
     public  HashMap<String, HashMap<Integer, PriorityQueue<Order>>> buyOrders = new HashMap<>();
     public  HashMap<String, HashMap<Integer, PriorityQueue<Order>>> sellOrders = new HashMap<>();
 
-    public ArrayList<Order> closedOrders = new ArrayList<>();
-
     @Data
     @Builder(toBuilder = true)
     @AllArgsConstructor
@@ -71,12 +69,10 @@ public class GetClosedOrdersStockTrading {
 
                 if (buyOrdersQueue.peek().getQty() == 0) {
                     buyOrdersQueue.peek().setOrderStatus(OrderStatus.CLOSED);
-                    closedOrders.add(buyOrdersQueue.peek());
                     buyOrdersQueue.poll();
                 }
                 if (sellOrdersQueue.peek().getQty() == 0){
                     sellOrdersQueue.peek().setOrderStatus(OrderStatus.CLOSED);
-                    closedOrders.add(sellOrdersQueue.peek());
                     sellOrdersQueue.poll();
                 }
         }
