@@ -1,11 +1,12 @@
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LRUCacheWithLinkedHashMap {
-    LinkedHashMap<Integer,Integer> map;
-    int capacityCheck;
-    int capacity;
+    private LinkedHashMap<Integer,Integer> map;
+    private int capacityCheck;
+    private int capacity;
 
     public LRUCacheWithLinkedHashMap(int capacity) {
         map=new LinkedHashMap<>();
@@ -31,8 +32,7 @@ public class LRUCacheWithLinkedHashMap {
             map.remove(key);
             map.put(key,value);
 
-        }else
-        {          
+        }else {
               if(capacityCheck<capacity){
                     map.put(key,value);
                     capacityCheck++;
@@ -43,14 +43,13 @@ public class LRUCacheWithLinkedHashMap {
            
         }
     }
-
-
-
     private void removeFirstElement() {
        int mapFirstKey=-1;
        Iterator<Map.Entry<Integer,Integer>> it = map.entrySet().iterator();
-       mapFirstKey=it.next().getKey();
-       map.remove(mapFirstKey);
+       if(it.hasNext()) {
+           mapFirstKey = it.next().getKey();
+           map.remove(mapFirstKey);
+       }
     }
 
     public static void main(String[] args) {
