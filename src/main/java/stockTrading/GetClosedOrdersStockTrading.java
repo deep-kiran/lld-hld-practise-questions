@@ -31,55 +31,69 @@ public class GetClosedOrdersStockTrading {
 
     }
 
-
+    /**
+     * Can improve code by using more generic method
+     * Map<OrderType, Map<String, Map<Integer, PriorityQueue<Order>>>> orderTypeToOrderBook = new HashMap<>();
+     * orderTypeToOrderBook.put(OrderType.BUY, buyOrders);
+     * orderTypeToOrderBook.put(OrderType.SELL, sellOrders);
+     *
+     * Map<String, Map<Integer, PriorityQueue<Order>>> orderBook = orderTypeToOrderBook.get(orderType);
+     * @param price
+     * @param qty
+     * @param productType
+     * @param orderType
+     * @return
+     */
     public int addOrder(int price, int qty, String productType, OrderType orderType){
         Order order = Order.builder().price(price).orderType(orderType)
                 .orderStatus(OrderStatus.OPEN)
                 .id(idGenerator.getAndIncrement())
                 .productType(productType).qty(qty).build();
-        if(OrderType.BUY.equals(order.orderType)){
-            buyOrders.putIfAbsent(productType, new HashMap<>());
-            buyOrders.get(productType).putIfAbsent(price, new PriorityQueue<>(Comparator.comparingInt(Order::getId)));
-            buyOrders.get(productType).get(price).offer(order);
-        }else {
-            sellOrders.putIfAbsent(productType, new HashMap<>());
-            sellOrders.get(productType).putIfAbsent(price, new PriorityQueue<>(Comparator.comparingInt(Order::getId)));
-            sellOrders.get(productType).get(price).offer(order);
+        HashMap<String, HashMap<Integer,PriorityQueue<Order>>> orderBook = (orderType == OrderType.BUY) ? buyOrders : sellOrders;
+
+        orderBook.putIfAbsent(productType, new HashMap<>());
+        HashMap<Integer,PriorityQueue<Order>> innerMap = orderBook.get(productType);
+        innerMap.putIfAbsent(price, new PriorityQueue<>(Comparator.comparingInt(Order::getId)));
+        synchronized (innerMap.get(price)) {
+            innerMap.get(price).offer(order);
         }
         return order.getId();
     }
 
-    public List<Order> getBacklogOrders(String productType, Integer price) {
+    public List<Order> getBacklogOrders(String productType, Integer price) throws ProductNotFoundException, PriceNotFoundException {
         List<Order> openOrders = new ArrayList<>();
-        PriorityQueue<Order> buyOrdersQueue =  null;
-        PriorityQueue<Order> sellOrdersQueue =  null;
-        if(!CollectionUtils.isEmpty(buyOrders) && buyOrders.containsKey(productType)){
-            buyOrdersQueue = buyOrders.get(productType).getOrDefault(price, null);
+
+        if(!CollectionUtils.isEmpty(buyOrders) && !buyOrders.containsKey(productType) || (!CollectionUtils.isEmpty(sellOrders) && !sellOrders.containsKey(productType))){
+            throw new ProductNotFoundException("Product is not found in buy/ sell orders");
         }
-        if(!CollectionUtils.isEmpty(sellOrders) && sellOrders.containsKey(productType)){
-            sellOrdersQueue = sellOrders.get(productType).getOrDefault(price, null);
+        if(!CollectionUtils.isEmpty(buyOrders) && !buyOrders.get(productType).containsKey(price) || (!CollectionUtils.isEmpty(sellOrders) && !sellOrders.containsKey(productType))){
+            throw new PriceNotFoundException(String.format("Price of productType %s is not found in buy/ sell orders", productType));
         }
-        while (!buyOrdersQueue.isEmpty() && !sellOrdersQueue.isEmpty()) {
+        synchronized (productType + price){
+            PriorityQueue<Order> buyOrdersQueue = buyOrders.get(productType).get(price);
+            PriorityQueue<Order> sellOrdersQueue = sellOrders.get(productType).get(price);
+            while (!buyOrdersQueue.isEmpty() && !sellOrdersQueue.isEmpty()) {
                 int buyQty = buyOrdersQueue.peek().getQty();
                 int sellQty = sellOrdersQueue.peek().getQty();
                 int minQtyReConcillable = Math.min(sellQty, buyQty);
 
-                buyOrdersQueue.peek().setQty(buyQty-minQtyReConcillable);
-                sellOrdersQueue.peek().setQty(sellQty-minQtyReConcillable);
+                buyOrdersQueue.peek().setQty(buyQty - minQtyReConcillable);
+                sellOrdersQueue.peek().setQty(sellQty - minQtyReConcillable);
 
                 if (buyOrdersQueue.peek().getQty() == 0) {
                     buyOrdersQueue.peek().setOrderStatus(OrderStatus.CLOSED);
                     buyOrdersQueue.poll();
                 }
-                if (sellOrdersQueue.peek().getQty() == 0){
+                if (sellOrdersQueue.peek().getQty() == 0) {
                     sellOrdersQueue.peek().setOrderStatus(OrderStatus.CLOSED);
                     sellOrdersQueue.poll();
                 }
+            }
+            for (Order o : sellOrdersQueue)
+                openOrders.add(o);
+            for (Order o : buyOrdersQueue)
+                openOrders.add(o);
         }
-        for (Order o :  sellOrdersQueue)
-            openOrders.add(o);
-        for (Order o : buyOrdersQueue)
-            openOrders.add(o);
         return openOrders;
     }
 
@@ -89,6 +103,7 @@ public class GetClosedOrdersStockTrading {
         int id = addOrder(12, 4, "maza", OrderType.BUY);
         Assert.assertEquals(id,1000);
     }
+
     @Test
     public void addOrderSellType() {
         int id = addOrder(12, 4, "maza", OrderType.SELL);
@@ -96,7 +111,7 @@ public class GetClosedOrdersStockTrading {
     }
 
     @Test
-    public void getOpenOrders(){
+    public void getOpenOrders() throws PriceNotFoundException, ProductNotFoundException {
         int id = addOrder(12, 4, "maza", OrderType.BUY);
         Assert.assertEquals(id,1000);
         int id2 = addOrder(12, 2, "maza", OrderType.SELL);
