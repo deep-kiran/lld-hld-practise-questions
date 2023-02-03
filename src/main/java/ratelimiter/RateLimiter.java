@@ -1,5 +1,7 @@
 package ratelimiter;
 
+import org.springframework.util.CollectionUtils;
+
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,7 +39,7 @@ public class RateLimiter {
                 deque.removeFirst();
             }
             //if the threshold is not hit yet, append the request
-            if (deque.size() >= capacity) {
+            if (!CollectionUtils.isEmpty(deque) && deque.size() >= capacity) {
                 deque.removeFirst();
             }
             deque.addLast(currentTime);
