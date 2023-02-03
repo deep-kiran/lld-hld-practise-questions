@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 
 public class RateLimiterTest {
-    private RateLimiterWithConcurrencyHandeling rateLimiter = new RateLimiterWithConcurrencyHandeling();
+    private RateLimiter rateLimiter = new RateLimiter(10,5);
 
     @Test
     public void testRateLimit() throws InterruptedException {
