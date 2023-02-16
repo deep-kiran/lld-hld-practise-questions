@@ -3,7 +3,7 @@ package callcenter;
 public abstract class Employee {
     private String name;
     private boolean free;
-    protected int rank;
+    protected EmployeeType employeeType;
     public Employee(String name, boolean free) {
         this.name = name;
         this.free = free;
@@ -15,15 +15,12 @@ public abstract class Employee {
     public void endCall(Call call) {
         System.out.println("Call ended by employee "+ this.name + " for customer " + call.getCustomer().getName());
         this.free = true;
-        CallManager.getInstance().callReceived();
+        CallHandler.getInstance().callReceived();
     }
     public boolean isFree() {
         return free;
     }
     public void setFree(boolean free) {
         this.free = free;
-    }
-    public int getRank() {
-        return rank;
     }
 }
