@@ -5,34 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd85553d-4a3b-4676-abc2-d259c5bff4a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/Computer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/ComputerAbstractFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/ComputerFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/PC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/PCFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/ServerFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/abstractfactory/TestDesignPatterns.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/adaptor/ex1/AdapterPatternDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/adaptor/ex1/AdvancedMediaPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/adaptor/ex1/AudioPlayerObselete.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/adaptor/ex1/MediaAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/adaptor/ex1/MediaPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/adaptor/ex1/Mp4Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/adaptor/ex1/VlcPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/commandchainpattern/Broker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/commandchainpattern/BuyStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/commandchainpattern/CommandPatternDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/commandchainpattern/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/commandchainpattern/SellStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/commandchainpattern/Stock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/facade/FacadeHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/facade/FacadePatternTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/facade/MySqlHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/facade/OracleHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/socketprogramming/LogEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java8.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java8.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/compositepattern/CompositePatternDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/designPatterns/compositepattern/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,9 +99,9 @@
       <command value="build" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.AdapterPatternDemo">
-    <configuration name="AdapterPatternDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="designPatterns.adaptor.ex1.AdapterPatternDemo" />
+  <component name="RunManager" selected="Application.CompositePatternDemo">
+    <configuration name="AdapterPatternTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="designPatterns.adaptor.ex1.AdapterPatternTest" />
       <module name="java8" />
       <extension name="coverage">
         <pattern>
@@ -144,6 +119,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="designPatterns.commandchainpattern.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CompositePatternDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="designPatterns.compositepattern.CompositePatternDemo" />
+      <module name="java8" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="designPatterns.compositepattern.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -177,22 +165,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CallcenterTest.addCustomerCall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="java8" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="callcenter.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="callcenter" />
-      <option name="MAIN_CLASS_NAME" value="callcenter.CallcenterTest" />
-      <option name="METHOD_NAME" value="addCustomerCall" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -205,19 +177,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.AdapterPatternDemo" />
+      <item itemvalue="Application.AdapterPatternTest" />
       <item itemvalue="Application.CommandPatternDemo" />
+      <item itemvalue="Application.CompositePatternDemo" />
       <item itemvalue="Application.TestDesignPatterns" />
       <item itemvalue="Application.LogEndpoint" />
-      <item itemvalue="JUnit.CallcenterTest.addCustomerCall" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AdapterPatternDemo" />
+        <item itemvalue="Application.CompositePatternDemo" />
+        <item itemvalue="Application.AdapterPatternTest" />
         <item itemvalue="Application.CommandPatternDemo" />
         <item itemvalue="Application.TestDesignPatterns" />
         <item itemvalue="Application.LogEndpoint" />
-        <item itemvalue="JUnit.CallcenterTest.addCustomerCall" />
       </list>
     </recent_temporary>
   </component>
