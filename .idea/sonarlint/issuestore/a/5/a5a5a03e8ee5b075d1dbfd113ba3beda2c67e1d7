@@ -1,8 +1,0 @@
-
-q
-java:S2095"VUse try-with-resources or close this "ScheduledExecutorService" in a "finally" clause.(àµ›Ÿúÿÿÿÿ
-
-java:S1130"{Remove the declaration of thrown exception 'java.net.UnknownHostException', as it cannot be thrown from constructor's body.(®ñ†.
-N	java:S106W"9Replace this use of System.out or System.err by a logger.( ÆÖÚ
-?
-java:S1128")Remove this unused import 'java.io.File'.(†Ğ¥Å
