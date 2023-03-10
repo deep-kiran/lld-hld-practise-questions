@@ -1,12 +1,0 @@
-
-M
-java:S1172
-"+Remove this unused method parameter "user".(£¬üÿÿÿÿ8éîÂøè0
-M
-java:S1172"+Remove this unused method parameter "user".(üÓ¶Àøÿÿÿÿ8êîÂøè0
-M
-java:S1068"2Remove this unused "notificationId" private field.(ÚÅĞµüÿÿÿÿ
-F
-java:S1068"+Remove this unused "content" private field.(ÃÇÿôøÿÿÿÿ
-F
-java:S1068"0Remove this unused "creationDate" private field.(ĞÉ¸
