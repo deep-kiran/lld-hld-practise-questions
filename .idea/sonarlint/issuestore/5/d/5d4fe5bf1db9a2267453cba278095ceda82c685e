@@ -1,0 +1,7 @@
+
+|
+java:S1488%"fImmediately return this expression instead of assigning it to the temporary variable "availableRooms".(Íò·«
+o
+java:S6204'"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ê±îîê0
+V
+java:S1128"4Remove this unused import 'java.time.LocalDateTime'.(æÃ§ƒüÿÿÿÿ8ë±îîê0

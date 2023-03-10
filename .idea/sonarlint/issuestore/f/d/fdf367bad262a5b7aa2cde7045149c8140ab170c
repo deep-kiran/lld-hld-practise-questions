@@ -1,0 +1,11 @@
+
+5
+java:S1640"Convert this Map to an EnumMap.(ñã®£
+h
+java:S6204 "RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
+h
+java:S6204&"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
+h
+java:S6204+"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
+T
+java:S1155:">Use isEmpty() to check whether the collection is empty or not.(Ø¾Óæ

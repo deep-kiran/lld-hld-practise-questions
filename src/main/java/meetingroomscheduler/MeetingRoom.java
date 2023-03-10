@@ -22,7 +22,7 @@ public class MeetingRoom {
         }
         Date startOfPreviousMeeting = meetingList.floorKey(interval.getStartAtTime());
         Date endOfPreviousMeeting= meetingList.get(startOfPreviousMeeting);
-        Date startOfNextMeeting = meetingList.ceilingKey(interval.getEndAtTime());
+        Date startOfNextMeeting = meetingList.higherKey(interval.getEndAtTime());
         if(Objects.isNull(endOfPreviousMeeting) || Objects.nonNull(endOfPreviousMeeting) && endOfPreviousMeeting.before(interval.getStartAtTime()) ){
             if(Objects.isNull(startOfNextMeeting) || interval.getEndAtTime().before(startOfNextMeeting)){
                 return true;
