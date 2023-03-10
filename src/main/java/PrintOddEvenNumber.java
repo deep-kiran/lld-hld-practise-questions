@@ -17,7 +17,7 @@ public class PrintOddEvenNumber {
             while (count < MAX_COUNT) {
                 while (count % 2 == 0) {
                     try {
-                        lock.wait(); // will give monitor lock to other thread which is running in the process
+                        lock.wait(); // will wait till other thread calls notify
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
